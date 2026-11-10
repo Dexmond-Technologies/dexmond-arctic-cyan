@@ -1,0 +1,9 @@
+The wallpapers in wallpapers/ and previews/ are © 2026 Dexmond Technologies Ltd and are licensed under the
+Creative Commons Attribution 4.0 International licence (CC BY 4.0):
+https://creativecommons.org/licenses/by/4.0/
+
+Attribution: "Dexmond Technologies".
+
+They are generated entirely by tools/make_wallpapers.py. The only input that was not drawn by code is the Dexmond
+mark (tools/mark_mask.png). The Dexmond name and mark are excluded from this licence (copyright and trademark). You may keep the mark in
+unmodified copies of the wallpapers; remove it from modified versions.

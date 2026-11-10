@@ -1,0 +1,4 @@
+dist/
+__pycache__/
+previews/*-3840x2160.png
+previews/crops/

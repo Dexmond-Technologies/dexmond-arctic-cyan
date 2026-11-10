@@ -1,0 +1,63 @@
+/* Dexmond Arctic Cyan theme: GTK colour overrides */
+@define-color accent_bg_color #00f5ff;
+@define-color accent_fg_color #070812;
+@define-color accent_color #00f5ff;
+@define-color window_bg_color #070912;
+@define-color window_fg_color #d8f5ff;
+@define-color view_bg_color #05070d;
+@define-color view_fg_color #d0efff;
+@define-color headerbar_bg_color #080f1a;
+@define-color headerbar_fg_color #00f5ff;
+@define-color headerbar_border_color #00f5ff;
+@define-color card_bg_color #0c1424;
+@define-color card_fg_color #d8f5ff;
+@define-color popover_bg_color #080e1c;
+@define-color popover_fg_color #d8f5ff;
+
+headerbar, .titlebar {
+    background-image: linear-gradient(90deg, #070c16 0%, #0a1b2a 50%, #071520 100%);
+    color: #00f5ff;
+    border-bottom: 1px solid #00f5ff;
+    box-shadow: 0 1px 10px rgba(0, 245, 255, 0.35);
+}
+
+headerbar:backdrop, .titlebar:backdrop {
+    background-image: linear-gradient(90deg, #050910 0%, #07121c 100%);
+    color: #557d96;
+    border-bottom: 1px solid #004d61;
+}
+
+window, .background {
+    background-color: #070912;
+    color: #d8f5ff;
+}
+
+window.desktopwindow, window.desktopwindow.background {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+selection, *:selected {
+    background-color: rgba(0, 245, 255, 0.32);
+    color: #ffffff;
+}
+
+scrollbar slider {
+    background-color: #00c2cb;
+    border-radius: 4px;
+}
+
+scrollbar slider:hover {
+    background-color: #00f5ff;
+}
+
+button.suggested-action {
+    background-image: linear-gradient(135deg, #00f5ff, #0077b6);
+    color: #070812;
+    border: 1px solid #00f5ff;
+    font-weight: bold;
+}
+
+entry:focus, textview:focus {
+    border-color: #00f5ff;
+    box-shadow: 0 0 8px rgba(0, 245, 255, 0.6);
+}
