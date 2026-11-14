@@ -1,0 +1,29 @@
+# Windows pack test: install.ps1 -WhatIf, install, check, uninstall, check restored.
+# Budget rule (owner 2026-11-14): manual runs only, one short Windows job, no artefacts.
+name: windows-pack-test
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  install-undo:
+    runs-on: windows-latest
+    timeout-minutes: 20
+    steps:
+      - name: Keep line endings exactly as committed (SHA256SUMS check)
+        run: git config --global core.autocrlf false
+
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Install, check, uninstall, check restored (Windows PowerShell 5.1)
+        shell: powershell
+        run: .\.github\ci\windows-pack-test.ps1
