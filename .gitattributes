@@ -1,0 +1,3 @@
+# Windows files keep CRLF line endings byte for byte, so windows/SHA256SUMS matches every checkout.
+windows/*.ps1 -text
+windows/*.theme -text

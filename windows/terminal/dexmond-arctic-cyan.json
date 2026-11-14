@@ -1,0 +1,26 @@
+{
+    "schemes": [
+        {
+            "name": "Dexmond Arctic Cyan",
+            "background": "#070812",
+            "foreground": "#e6f1ff",
+            "cursorColor": "#00f5ff",
+            "black": "#070812",
+            "red": "#ff073a",
+            "green": "#00ff66",
+            "yellow": "#ffea00",
+            "blue": "#2979ff",
+            "purple": "#d946ef",
+            "cyan": "#00e5ff",
+            "white": "#e2e8f0",
+            "brightBlack": "#64748b",
+            "brightRed": "#ff1744",
+            "brightGreen": "#39ff14",
+            "brightYellow": "#ffee00",
+            "brightBlue": "#ffee00",
+            "brightPurple": "#f43f5e",
+            "brightCyan": "#00f5ff",
+            "brightWhite": "#ffea00"
+        }
+    ]
+}

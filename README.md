@@ -6,6 +6,8 @@ A dark cyan theme designed for use with the GNOME desktop, tested on Ubuntu 24.0
 
 Also included: **Neural** and **Horizon**.
 
+**Windows 10 and 11:** see [`windows/README.md`](windows/README.md) for a free Windows version (dark mode, cyan accent, wallpaper, Windows Terminal scheme).
+
 ## What it changes
 - `~/.config/gtk-3.0/gtk.css` and `~/.config/gtk-4.0/gtk.css`: cyan accent, dark windows and header bars. They apply on top of the **Yaru-blue-dark** theme that ships with Ubuntu, which the installer selects if it is installed. Yaru itself is not included or modified.
 - Dark style (`color-scheme = prefer-dark`).

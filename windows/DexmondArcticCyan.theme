@@ -1,0 +1,27 @@
+; Dexmond Arctic Cyan for Windows 10 and 11. Free.
+; This file: MIT licence. Wallpaper: CC BY 4.0, credit "Dexmond Technologies". See README.md.
+;
+; Before you double-click this file, copy wallpapers\dexmond-circuit-3840x2160.png to
+;   %LOCALAPPDATA%\Dexmond\ArcticCyan\wallpapers\
+; (install.ps1 does the rest for you and can be undone; this file cannot be undone automatically.)
+
+[Theme]
+DisplayName=Dexmond Arctic Cyan
+
+[Control Panel\Desktop]
+Wallpaper=%LOCALAPPDATA%\Dexmond\ArcticCyan\wallpapers\dexmond-circuit-3840x2160.png
+TileWallpaper=0
+WallpaperStyle=10
+Pattern=
+
+[VisualStyles]
+Path=%SystemRoot%\resources\Themes\Aero\Aero.msstyles
+ColorStyle=NormalColor
+Size=NormalSize
+AutoColorization=0
+ColorizationColor=0XC400F5FF
+SystemMode=Dark
+AppMode=Dark
+
+[MasterThemeSelector]
+MTSM=RJSPBS
