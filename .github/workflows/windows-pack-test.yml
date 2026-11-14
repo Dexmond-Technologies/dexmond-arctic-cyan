@@ -4,11 +4,6 @@ name: windows-pack-test
 
 on:
   workflow_dispatch:
-  # TEMPORARY: one verification run (a dispatch-only workflow cannot start off the default
-  # branch until GitHub has registered it). Removed in the next commit.
-  push:
-    branches: [windows-pack]
-    paths: [.github/workflows/windows-pack-test.yml]
 
 permissions:
   contents: read

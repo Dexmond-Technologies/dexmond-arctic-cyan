@@ -54,10 +54,12 @@ function Get-U32([string]$Path, [string]$Name) {
     return [BitConverter]::ToUInt32([BitConverter]::GetBytes([int]$v), 0)
 }
 
-function Invoke-Pack([string]$Script, [string[]]$ScriptArgs) {
+function Invoke-Pack([string]$Script, [string[]]$ScriptArgs, [switch]$NonFatal) {
     Write-Host "---- powershell $Script $($ScriptArgs -join ' ')"
     & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $Pack $Script) @ScriptArgs
-    if ($LASTEXITCODE -ne 0) { throw "$Script exited with $LASTEXITCODE" }
+    $code = $LASTEXITCODE
+    if ($NonFatal) { Check ($code -eq 0) "$Script $($ScriptArgs -join ' ') exits 0 (got $code)"; return }
+    if ($code -ne 0) { throw "$Script exited with $code" }
 }
 
 Write-Host "PowerShell used for the pack: Windows PowerShell 5.1 (powershell.exe)"
@@ -109,7 +111,8 @@ $Snap0 = Get-Snapshot
 Write-Host 'Seeded state:'; $Snap0.GetEnumerator() | ForEach-Object { Write-Host "  $($_.Key) = $($_.Value)" }
 
 # 2. -WhatIf changes nothing.
-Invoke-Pack 'install.ps1' @('-WhatIf', '-Size', '1920x1080')
+# Non-fatal: a -WhatIf crash is recorded and the install/undo checks below still run.
+Invoke-Pack 'install.ps1' @('-WhatIf', '-Size', '1920x1080') -NonFatal
 Check (-not (Test-Path -LiteralPath $CurrentFile)) 'WhatIf: no install record written'
 Check (-not (Test-Path -LiteralPath $StateDir)) 'WhatIf: no state folder created'
 $SnapW = Get-Snapshot
@@ -132,7 +135,9 @@ Check ($names -contains 'Dexmond Arctic Cyan') 'install: Terminal scheme "Dexmon
 Check ($names -contains 'CI Existing Scheme') 'install: existing Terminal scheme kept'
 Check (@($term.profiles.list).Count -eq 1) 'install: Terminal profiles kept'
 
-# 4. Uninstall restores everything.
+# 4. Uninstall restores everything (-WhatIf first must change nothing).
+Invoke-Pack 'uninstall.ps1' @('-WhatIf') -NonFatal
+Check (Test-Path -LiteralPath $CurrentFile) 'uninstall -WhatIf: install record kept'
 Invoke-Pack 'uninstall.ps1' @()
 Check (-not (Test-Path -LiteralPath $CurrentFile)) 'uninstall: install record removed'
 $Snap1 = Get-Snapshot
