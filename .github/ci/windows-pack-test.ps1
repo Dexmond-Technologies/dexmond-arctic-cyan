@@ -51,7 +51,10 @@ function Get-Snapshot {
 
 function Get-U32([string]$Path, [string]$Name) {
     $v = (Get-ItemProperty -LiteralPath $Path -Name $Name).$Name
-    return [BitConverter]::ToUInt32([BitConverter]::GetBytes([int]$v), 0)
+    # The value can come back as Int32 (negative) or as a wider type; compare the 32-bit pattern.
+    $l = [int64]$v
+    if ($l -lt 0) { $l += 4294967296L }
+    return $l
 }
 
 function Invoke-Pack([string]$Script, [string[]]$ScriptArgs, [switch]$NonFatal) {
