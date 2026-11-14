@@ -50,7 +50,14 @@ function Write-Utf8NoBom([string]$Path, [string]$Text) {
 }
 
 function Get-FileSha256([string]$Path) {
-    return (Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash
+    # Plain .NET, not Get-FileHash: under -WhatIf Get-FileHash returns nothing, and reading
+    # .Hash from that stops the script in StrictMode. Reading a file changes nothing.
+    $sha = [System.Security.Cryptography.SHA256]::Create()
+    try {
+        $fs = [System.IO.File]::OpenRead($Path)
+        try { return ([BitConverter]::ToString($sha.ComputeHash($fs))).Replace('-', '') }
+        finally { $fs.Dispose() }
+    } finally { $sha.Dispose() }
 }
 
 function Restore-RegValue($Rec) {
