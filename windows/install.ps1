@@ -316,7 +316,7 @@ $terminalWrites = @()
 if (-not $NoTerminal) {
     $schemeFile = Join-Path $Here 'terminal\dexmond-arctic-cyan.json'
     $scheme = (Get-Content -LiteralPath $schemeFile -Raw | ConvertFrom-Json).schemes[0]
-    $paths = Get-TerminalSettingsPaths
+    $paths = @(Get-TerminalSettingsPaths)
     if ($paths.Count -eq 0) {
         Write-Host '  Windows Terminal settings.json not found; skipping the colour scheme.'
         Write-Host "  (You can paste the scheme by hand from $schemeFile.)"

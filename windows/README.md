@@ -75,7 +75,7 @@ There is no one-click `.deskthemepack` file yet. A .deskthemepack is a Microsoft
 - `install.ps1`, `uninstall.ps1`: the scripts. They run in Windows PowerShell 5.1, which comes with Windows 10 and 11, and in PowerShell 7.
 - `DexmondArcticCyan.theme`: the .theme file.
 - `terminal/dexmond-arctic-cyan.json`: the Windows Terminal scheme. Its 16 colours are the same as the GNOME Terminal palette in `../terminal/palette.txt`, in the same order. The background is `#070812`, the text `#e6f1ff` and the cursor `#00f5ff`.
-- `build-zip.sh`: builds the download zip (run on Linux or macOS).
+- `build-zip.sh`: builds the download zip (run on Linux; it uses GNU find, xargs and touch).
 - `SHA256SUMS`: checksums. To check them, run `sha256sum -c SHA256SUMS` in this folder, or `Get-FileHash` in PowerShell.
 - Wallpapers: the scripts use the PNG files in `../wallpapers/` in the repository, or in `wallpapers\` inside the zip. Three designs (Circuit, Neural, Horizon), each at 3840×2160, 2560×1440 and 1920×1080. The 1080×1920 phone versions in the repository are not used on Windows.
 
