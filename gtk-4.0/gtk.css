@@ -1,63 +1,178 @@
-/* Dexmond Arctic Cyan theme: GTK colour overrides */
-@define-color accent_bg_color #00f5ff;
-@define-color accent_fg_color #070812;
+/* Dexmond Arctic Cyan theme 1.1.0: GTK 4 and libadwaita overrides.
+ *
+ * Installed as ~/.config/gtk-4.0/gtk.css. GTK 4 loads it at user priority in
+ * every GTK 4 app. libadwaita apps (Files, Settings, Text Editor...) draw
+ * almost everything from the named colours below, so redefining them recolours
+ * the whole app. Plain GTK 4 apps that use Yaru-blue-dark read the GTK 3 era
+ * names (theme_*), which are defined too.
+ */
+
+/* ------------------------------------------------- libadwaita named colours */
 @define-color accent_color #00f5ff;
+@define-color accent_bg_color #00c8d4;
+@define-color accent_fg_color #03121a;
+
+@define-color destructive_color #ff5ca8;
+@define-color destructive_bg_color #a8155f;
+@define-color destructive_fg_color #ffffff;
+
+@define-color success_color #3ef0a0;
+@define-color success_bg_color #0f7a52;
+@define-color success_fg_color #ffffff;
+
+@define-color warning_color #ffd24d;
+@define-color warning_bg_color #c99a00;
+@define-color warning_fg_color #03121a;
+
+@define-color error_color #ff5ca8;
+@define-color error_bg_color #a8155f;
+@define-color error_fg_color #ffffff;
+
 @define-color window_bg_color #070912;
 @define-color window_fg_color #d8f5ff;
+
 @define-color view_bg_color #05070d;
 @define-color view_fg_color #d0efff;
+
 @define-color headerbar_bg_color #080f1a;
 @define-color headerbar_fg_color #00f5ff;
 @define-color headerbar_border_color #00f5ff;
+@define-color headerbar_backdrop_color #070912;
+@define-color headerbar_shade_color rgba(0, 0, 0, 0.36);
+@define-color headerbar_darker_shade_color rgba(0, 0, 0, 0.9);
+
+@define-color sidebar_bg_color #080d19;
+@define-color sidebar_fg_color #d8f5ff;
+@define-color sidebar_backdrop_color #070b15;
+@define-color sidebar_shade_color rgba(0, 0, 0, 0.36);
+@define-color sidebar_border_color #16283c;
+
+@define-color secondary_sidebar_bg_color #070b16;
+@define-color secondary_sidebar_fg_color #d8f5ff;
+@define-color secondary_sidebar_backdrop_color #060912;
+@define-color secondary_sidebar_shade_color rgba(0, 0, 0, 0.36);
+@define-color secondary_sidebar_border_color #16283c;
+
 @define-color card_bg_color #0c1424;
 @define-color card_fg_color #d8f5ff;
-@define-color popover_bg_color #080e1c;
-@define-color popover_fg_color #d8f5ff;
+@define-color card_shade_color rgba(0, 0, 0, 0.36);
 
+@define-color dialog_bg_color #0c1424;
+@define-color dialog_fg_color #d8f5ff;
+
+@define-color popover_bg_color #0c1424;
+@define-color popover_fg_color #d8f5ff;
+@define-color popover_shade_color rgba(0, 0, 0, 0.36);
+
+@define-color thumbnail_bg_color #0c1424;
+@define-color thumbnail_fg_color #d8f5ff;
+
+@define-color shade_color rgba(0, 0, 0, 0.36);
+@define-color scrollbar_outline_color rgba(0, 0, 0, 0.5);
+
+/* --------------------------------------- GTK 3 era names (Yaru GTK 4 apps) */
+@define-color theme_fg_color #d8f5ff;
+@define-color theme_text_color #d0efff;
+@define-color theme_bg_color #070912;
+@define-color theme_base_color #05070d;
+@define-color theme_selected_bg_color #00c8d4;
+@define-color theme_selected_fg_color #03121a;
+@define-color insensitive_bg_color #0a101c;
+@define-color insensitive_fg_color #5d7689;
+@define-color insensitive_base_color #05070d;
+@define-color theme_unfocused_fg_color #8fb0c6;
+@define-color theme_unfocused_text_color #b9dcef;
+@define-color theme_unfocused_bg_color #070912;
+@define-color theme_unfocused_base_color #05070d;
+@define-color theme_unfocused_selected_bg_color #0b3644;
+@define-color theme_unfocused_selected_fg_color #cfefff;
+@define-color unfocused_insensitive_color #3d5466;
+@define-color borders #16283c;
+@define-color unfocused_borders #111f2f;
+@define-color content_view_bg #05070d;
+@define-color text_view_bg #05070d;
+
+/* ------------------------------------------------------------- widget rules */
 headerbar, .titlebar {
     background-image: linear-gradient(90deg, #070c16 0%, #0a1b2a 50%, #071520 100%);
     color: #00f5ff;
     border-bottom: 1px solid #00f5ff;
     box-shadow: 0 1px 10px rgba(0, 245, 255, 0.35);
 }
-
 headerbar:backdrop, .titlebar:backdrop {
     background-image: linear-gradient(90deg, #050910 0%, #07121c 100%);
-    color: #557d96;
-    border-bottom: 1px solid #004d61;
+    color: #7fa6bd;
+    border-bottom: 1px solid #00566b;
+    box-shadow: none;
 }
-
-window, .background {
-    background-color: #070912;
-    color: #d8f5ff;
+/* Headers inside split views, sidebars and dialogs: no double glow line. */
+.sidebar-pane headerbar, .content-pane headerbar, toolbarview headerbar,
+dialog headerbar, window.dialog headerbar {
+    box-shadow: none;
 }
+headerbar .title, .titlebar .title { color: #00f5ff; font-weight: bold; }
+headerbar .subtitle { color: #8fb0c6; }
 
 window.desktopwindow, window.desktopwindow.background {
     background-color: rgba(0, 0, 0, 0);
 }
 
-selection, *:selected {
-    background-color: rgba(0, 245, 255, 0.32);
+selection, text selection, label > selection {
+    background-color: rgba(0, 245, 255, 0.35);
     color: #ffffff;
 }
 
-scrollbar slider {
-    background-color: #00c2cb;
-    border-radius: 4px;
+/* Selected rows in lists and grids: cyan fill, navy text. */
+.navigation-sidebar > row:selected, list.navigation-sidebar > row:selected,
+columnview > listview > row:selected, listview > row:selected, gridview > child:selected,
+treeview.view:selected, .view:selected, iconview:selected, flowbox > flowboxchild:selected {
+    background-color: alpha(#00c8d4, 0.9);
+    color: #03121a;
+}
+.navigation-sidebar > row:selected:backdrop, columnview > listview > row:selected:backdrop,
+listview > row:selected:backdrop, gridview > child:selected:backdrop {
+    background-color: #0b3644;
+    color: #cfefff;
+}
+.navigation-sidebar > row:selected image, .navigation-sidebar > row:selected label,
+listview > row:selected label, columnview > listview > row:selected label,
+gridview > child:selected label {
+    color: inherit;
 }
 
-scrollbar slider:hover {
-    background-color: #00f5ff;
-}
+scrollbar slider { background-color: #00c2cb; }
+scrollbar slider:hover { background-color: #00f5ff; }
+scrollbar slider:active { background-color: #5cfaff; }
 
-button.suggested-action {
-    background-image: linear-gradient(135deg, #00f5ff, #0077b6);
-    color: #070812;
+button.suggested-action, button.default:not(.flat) {
+    background-image: linear-gradient(135deg, #00f5ff, #00b3d6);
+    color: #03121a;
     border: 1px solid #00f5ff;
     font-weight: bold;
 }
+button.suggested-action:hover {
+    background-image: linear-gradient(135deg, #5cfaff, #00c8e8);
+    box-shadow: 0 0 10px rgba(0, 245, 255, 0.55);
+}
+button.suggested-action:disabled {
+    background-image: none;
+    border-color: #16283c;
+}
 
-entry:focus, textview:focus {
-    border-color: #00f5ff;
-    box-shadow: 0 0 8px rgba(0, 245, 255, 0.6);
+entry:focus-within, textview:focus, spinbutton:focus-within, .entry:focus-within {
+    outline-color: rgba(0, 245, 255, 0.8);
+    box-shadow: 0 0 8px rgba(0, 245, 255, 0.45);
+}
+
+switch:checked { background-color: #00c8d4; }
+switch:checked > slider { background-color: #ffffff; }
+
+popover > contents, popover > arrow, popover.menu > contents {
+    border: 1px solid rgba(0, 245, 255, 0.35);
+}
+
+tooltip, tooltip.background {
+    background-color: rgba(3, 6, 12, 0.96);
+    color: #d8f5ff;
+    border: 1px solid rgba(0, 245, 255, 0.45);
 }

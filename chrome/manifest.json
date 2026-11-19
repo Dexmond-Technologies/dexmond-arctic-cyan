@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "Dexmond Arctic Cyan",
+  "version": "1.1.0",
+  "description": "Navy browser frame with Arctic Cyan accents, from the Dexmond Arctic Cyan desktop theme.",
+  "theme": {
+    "colors": {
+      "frame": [7, 9, 18],
+      "frame_inactive": [5, 7, 13],
+      "frame_incognito": [5, 7, 13],
+      "frame_incognito_inactive": [5, 7, 13],
+      "toolbar": [12, 20, 36],
+      "toolbar_text": [216, 245, 255],
+      "toolbar_button_icon": [0, 245, 255],
+      "tab_text": [216, 245, 255],
+      "tab_background_text": [143, 176, 198],
+      "tab_background_text_inactive": [93, 118, 137],
+      "bookmark_text": [208, 239, 255],
+      "omnibox_background": [5, 7, 13],
+      "omnibox_text": [216, 245, 255],
+      "button_background": [14, 26, 43],
+      "ntp_background": [5, 7, 13],
+      "ntp_text": [216, 245, 255],
+      "ntp_link": [92, 225, 255],
+      "ntp_header": [0, 245, 255]
+    },
+    "tints": {
+      "buttons": [0.5, 1.0, 0.5]
+    },
+    "properties": {
+      "ntp_background_alignment": "center"
+    }
+  }
+}

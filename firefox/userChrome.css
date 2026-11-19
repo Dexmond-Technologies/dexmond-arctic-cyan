@@ -1,0 +1,36 @@
+/* Dexmond Arctic Cyan: optional Firefox window styling (userChrome.css).
+ * Off by default. ./install.sh --firefox copies it into your default Firefox
+ * profile's chrome/ folder and turns on the pref that lets Firefox read it
+ * (toolkit.legacyUserProfileCustomizations.stylesheets). Restart Firefox after.
+ * Firefox's own UI can change between versions; if something looks wrong,
+ * ./uninstall.sh removes this file and the pref. */
+:root {
+  --dx-navy: #070912;
+  --dx-void: #05070d;
+  --dx-card: #0c1424;
+  --dx-fg: #d8f5ff;
+  --dx-dim: #8fb0c6;
+  --dx-cyan: #00f5ff;
+  --dx-line: #16283c;
+
+  --toolbar-bgcolor: var(--dx-card) !important;
+  --toolbar-color: var(--dx-fg) !important;
+  --lwt-accent-color: var(--dx-navy) !important;
+  --lwt-text-color: var(--dx-fg) !important;
+  --tab-selected-bgcolor: var(--dx-void) !important;
+  --tab-selected-textcolor: var(--dx-cyan) !important;
+  --toolbar-field-background-color: var(--dx-void) !important;
+  --toolbar-field-color: var(--dx-fg) !important;
+  --toolbar-field-focus-background-color: var(--dx-void) !important;
+  --toolbar-field-focus-color: var(--dx-fg) !important;
+  --toolbar-field-focus-border-color: var(--dx-cyan) !important;
+  --focus-outline-color: var(--dx-cyan) !important;
+  --arrowpanel-background: var(--dx-card) !important;
+  --arrowpanel-color: var(--dx-fg) !important;
+  --arrowpanel-border-color: rgba(0, 245, 255, 0.35) !important;
+  --sidebar-background-color: var(--dx-navy) !important;
+  --sidebar-text-color: var(--dx-fg) !important;
+}
+#navigator-toolbox { background-color: var(--dx-navy) !important; border-bottom: 1px solid var(--dx-cyan) !important; }
+.tab-background[selected] { box-shadow: inset 0 2px 0 var(--dx-cyan) !important; }
+#urlbar[focused] > #urlbar-background { box-shadow: 0 0 8px rgba(0, 245, 255, 0.5) !important; }

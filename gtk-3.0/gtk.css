@@ -1,6 +1,82 @@
-/* Dexmond Arctic Cyan theme: GTK colour overrides */
+/* Dexmond Arctic Cyan theme 1.1.0: GTK 3 overrides.
+ *
+ * Installed as ~/.config/gtk-3.0/gtk.css, on top of Yaru-blue-dark.
+ * GTK loads this file at user priority, so every rule here beats the theme's
+ * rule for the same property, whatever the selector specificity. That is why
+ * each widget below spells out all of its states (hover, active, checked,
+ * disabled, backdrop): a bare rule would flatten them.
+ *
+ * Yaru's GTK 3 stylesheet uses literal colours, not named ones, so the
+ * @define-color block alone only reaches apps that read the named colours
+ * (custom drawing, app CSS). The widget rules below do the rest.
+ */
+
+/* ---------------------------------------------------------------- palette */
+@define-color dx_void      #05070d;   /* views, lists, text areas            */
+@define-color dx_navy      #070912;   /* window background                   */
+@define-color dx_side      #080d19;   /* sidebars                            */
+@define-color dx_head      #080f1a;   /* header bars, toolbars               */
+@define-color dx_card      #0c1424;   /* cards, popovers, menus              */
+@define-color dx_btn       #0e1a2b;   /* buttons, entries                    */
+@define-color dx_btn_hover #13263a;
+@define-color dx_btn_down  #091320;
+@define-color dx_line      #16283c;   /* borders                             */
+@define-color dx_line_hi   #23415a;   /* stronger borders, slider troughs    */
+@define-color dx_fg        #d8f5ff;   /* body text                           */
+@define-color dx_text      #d0efff;   /* text in views                       */
+@define-color dx_dim       #8fb0c6;   /* secondary text, backdrop text       */
+@define-color dx_off       #5d7689;   /* disabled text                       */
+@define-color dx_cyan      #00f5ff;   /* Arctic Cyan accent                  */
+@define-color dx_cyan_mid  #00c8d4;   /* selected rows (focused)             */
+@define-color dx_cyan_deep #0b3644;   /* selected rows (window in backdrop)  */
+@define-color dx_ink       #03121a;   /* text on cyan                        */
+@define-color dx_pink      #ff5ca8;   /* errors, destructive (no red/orange) */
+@define-color dx_yellow    #ffd24d;   /* warnings                            */
+@define-color dx_mint      #3ef0a0;   /* success                             */
+
+/* ------------------------------------------------ GTK 3 / Yaru colour names */
+@define-color theme_fg_color #d8f5ff;
+@define-color theme_text_color #d0efff;
+@define-color theme_bg_color #070912;
+@define-color theme_base_color #05070d;
+@define-color theme_selected_bg_color #00c8d4;
+@define-color theme_selected_fg_color #03121a;
+@define-color insensitive_bg_color #0a101c;
+@define-color insensitive_fg_color #5d7689;
+@define-color insensitive_base_color #05070d;
+@define-color theme_unfocused_fg_color #8fb0c6;
+@define-color theme_unfocused_text_color #b9dcef;
+@define-color theme_unfocused_bg_color #070912;
+@define-color theme_unfocused_base_color #05070d;
+@define-color theme_unfocused_selected_bg_color #0b3644;
+@define-color theme_unfocused_selected_fg_color #cfefff;
+@define-color unfocused_insensitive_color #3d5466;
+@define-color borders #16283c;
+@define-color unfocused_borders #111f2f;
+@define-color warning_color #ffd24d;
+@define-color error_color #ff5ca8;
+@define-color success_color #3ef0a0;
+@define-color content_view_bg #05070d;
+@define-color text_view_bg #05070d;
+@define-color link_color #5ce1ff;
+@define-color visited_link_color #b48cff;
+@define-color wm_title #00f5ff;
+@define-color wm_unfocused_title #8fb0c6;
+@define-color wm_highlight rgba(0, 0, 0, 0);
+@define-color wm_borders_edge rgba(0, 245, 255, 0.10);
+@define-color wm_bg_a #0a1b2a;
+@define-color wm_bg_b #080f1a;
+@define-color wm_shadow alpha(black, 0.45);
+@define-color wm_border alpha(black, 0.25);
+@define-color wm_button_hover_color_a #13263a;
+@define-color wm_button_hover_color_b #0e1a2b;
+@define-color wm_button_active_color_a #091320;
+@define-color wm_button_active_color_b #091320;
+@define-color wm_button_active_color_c #091320;
+
+/* libadwaita / libhandy names, read by some GTK 3 apps too */
 @define-color accent_bg_color #00f5ff;
-@define-color accent_fg_color #070812;
+@define-color accent_fg_color #03121a;
 @define-color accent_color #00f5ff;
 @define-color window_bg_color #070912;
 @define-color window_fg_color #d8f5ff;
@@ -11,53 +87,660 @@
 @define-color headerbar_border_color #00f5ff;
 @define-color card_bg_color #0c1424;
 @define-color card_fg_color #d8f5ff;
-@define-color popover_bg_color #080e1c;
+@define-color popover_bg_color #0c1424;
 @define-color popover_fg_color #d8f5ff;
+@define-color destructive_color #ff5ca8;
 
-headerbar, .titlebar {
-    background-image: linear-gradient(90deg, #070c16 0%, #0a1b2a 50%, #071520 100%);
-    color: #00f5ff;
-    border-bottom: 1px solid #00f5ff;
-    box-shadow: 0 1px 10px rgba(0, 245, 255, 0.35);
-}
-
-headerbar:backdrop, .titlebar:backdrop {
-    background-image: linear-gradient(90deg, #050910 0%, #07121c 100%);
-    color: #557d96;
-    border-bottom: 1px solid #004d61;
+/* ------------------------------------------------------------- base states */
+* {
+    -gtk-secondary-caret-color: @dx_cyan;
+    -GtkTextView-error-underline-color: @dx_pink;
+    outline-color: alpha(@dx_cyan, 0.55);
 }
 
 window, .background {
-    background-color: #070912;
-    color: #d8f5ff;
+    background-color: @dx_navy;
+    color: @dx_fg;
+}
+.background:backdrop {
+    background-color: @dx_navy;
+    color: @dx_dim;
 }
 
-window.desktopwindow, window.desktopwindow.background {
-    background-color: rgba(0, 0, 0, 0);
+*:link, button.link > label, label > link { color: @link_color; }
+*:visited, label > link:visited { color: @visited_link_color; }
+
+label.dim-label, .dim-label, label.subtitle { color: @dx_dim; }
+label:disabled, label:disabled:backdrop { color: @dx_off; }
+
+selection, *:selected selection, entry selection, textview text selection,
+label selection, spinbutton selection {
+    background-color: alpha(@dx_cyan, 0.35);
+    color: #ffffff;
+}
+selection:backdrop, label selection:backdrop, entry selection:backdrop,
+textview text selection:backdrop {
+    background-color: alpha(@dx_cyan, 0.18);
+    color: @dx_fg;
 }
 
-selection, *:selected {
-    background-color: rgba(0, 245, 255, 0.32);
+/* ------------------------------------------------------- views and lists */
+.view, iconview, .view text, iconview text, textview text, textview,
+treeview.view, list, .content-view, .content-view.view {
+    background-color: @dx_void;
+    color: @dx_text;
+}
+.view:backdrop, iconview:backdrop, textview text:backdrop, treeview.view:backdrop,
+list:backdrop, .content-view:backdrop {
+    background-color: @dx_void;
+    color: @dx_dim;
+}
+textview border { background-color: @dx_navy; }
+
+.view:selected, .view:selected:focus, iconview:selected, iconview:selected:focus,
+treeview.view:selected, treeview.view:selected:focus,
+.view text:selected, textview text:selected,
+row:selected, row:selected:focus, list row:selected, flowbox flowboxchild:selected,
+.content-view .tile:selected, menuitem:selected, *:selected {
+    background-color: @dx_cyan_mid;
+    background-image: none;
+    color: @dx_ink;
+}
+.view:selected:backdrop, iconview:selected:backdrop, treeview.view:selected:backdrop,
+row:selected:backdrop, list row:selected:backdrop, flowbox flowboxchild:selected:backdrop,
+*:selected:backdrop {
+    background-color: @dx_cyan_deep;
+    background-image: none;
+    color: @theme_unfocused_selected_fg_color;
+}
+row.activatable:selected:hover, row:selected:hover {
+    background-color: shade(@dx_cyan_mid, 1.1);
+    color: @dx_ink;
+}
+row.activatable:hover, row.activatable.has-open-popup {
+    background-color: alpha(@dx_cyan, 0.07);
+}
+row.activatable:backdrop:hover { background-color: transparent; }
+row.activatable:active { background-color: alpha(@dx_cyan, 0.12); }
+
+treeview.view {
+    border-left-color: @dx_line_hi;
+    border-top-color: @dx_line;
+}
+treeview.view:selected, treeview.view:selected:backdrop {
+    border-left-color: alpha(@dx_ink, 0.4);
+    border-top-color: alpha(@dx_ink, 0.2);
+}
+treeview.view:disabled { color: @dx_off; }
+treeview.view.separator { color: @dx_line; }
+treeview.view:drop(active) { border-color: @dx_cyan; }
+treeview.view.expander { color: @dx_dim; }
+treeview.view.expander:hover { color: @dx_cyan; }
+treeview.view.expander:selected, treeview.view.expander:selected:hover { color: @dx_ink; }
+treeview.view.expander:selected:backdrop { color: @theme_unfocused_selected_fg_color; }
+treeview.view.progressbar {
+    background-color: @dx_cyan;
+    background-image: image(@dx_cyan);
+    color: @dx_ink;
+}
+treeview.view.progressbar:selected, treeview.view.progressbar:selected:focus {
+    background-image: image(@dx_ink);
+    background-color: @dx_ink;
+}
+treeview.view.trough { background-color: alpha(@dx_cyan, 0.12); }
+treeview.view.trough:selected, treeview.view.trough:selected:focus { background-color: alpha(@dx_ink, 0.35); }
+
+/* Column headers (Rhythmbox, file choosers, Disks, Software & Updates...) */
+treeview.view header button,
+treeview.view header button:hover,
+treeview.view header button:active {
+    background-color: @dx_head;
+    background-image: none;
+    border-color: @dx_line;
+    box-shadow: none;
+    text-shadow: none;
+}
+treeview.view header button { color: @dx_dim; }
+treeview.view header button:hover { color: @dx_cyan; }
+treeview.view header button:active { color: @dx_fg; }
+treeview.view header button:backdrop {
+    background-color: @dx_head;
+    border-color: @dx_line;
+    color: @dx_off;
+}
+treeview.view header button:disabled { background-color: @dx_head; border-color: @dx_line; }
+treeview.view button.dnd, treeview.view header.button.dnd,
+treeview.view button.dnd:hover, treeview.view button.dnd:active, treeview.view button.dnd:selected {
+    background-color: @dx_cyan;
+    background-image: none;
+    color: @dx_ink;
+    box-shadow: inset 0 0 0 1px @dx_void;
+}
+treeview.view acceleditor > label { background-color: @dx_cyan_mid; color: @dx_ink; }
+treeview entry, treeview entry.flat { background-color: @dx_void; color: @dx_fg; border-color: @dx_cyan; }
+
+iconview:hover { background-color: alpha(@dx_cyan, 0.07); }
+.content-view .tile:hover { background-color: alpha(@dx_cyan, 0.07); }
+.content-view .rubberband, .rubberband, rubberband {
+    background-color: alpha(@dx_cyan, 0.18);
+    border: 1px solid @dx_cyan;
+}
+
+list { border-color: @dx_line; }
+list row { color: inherit; }
+list.content > row:not(.expander):not(:active):not(:hover):not(:selected),
+list.content > row.expander row.header:not(:active):not(:hover):not(:selected) {
+    background-color: @dx_card;
+}
+list.content > row:not(:last-child) { border-bottom: 1px solid @dx_line; }
+list.content { border-color: @dx_line; }
+
+/* -------------------------------------------------------------- sidebars */
+.sidebar, sidebar, placessidebar, stacksidebar, .sidebar list, placessidebar list,
+placessidebar > viewport.frame, stacksidebar list, .navigation-sidebar,
+.sidebar treeview.view, .sidebar .view {
+    background-color: @dx_side;
+    color: @dx_fg;
+}
+.sidebar:backdrop, placessidebar:backdrop, stacksidebar:backdrop,
+.sidebar list:backdrop, placessidebar list:backdrop, .sidebar treeview.view:backdrop {
+    background-color: @dx_side;
+    color: @dx_dim;
+}
+.sidebar:not(separator):dir(ltr), .sidebar:not(separator).left,
+stacksidebar.sidebar:dir(ltr) list { border-right: 1px solid @dx_line; }
+.sidebar:not(separator):dir(rtl), .sidebar:not(separator).right,
+stacksidebar.sidebar:dir(rtl) list { border-left: 1px solid @dx_line; }
+paned .sidebar, paned .sidebar.left, paned .sidebar.right { border-style: none; }
+placessidebar row:selected, stacksidebar row:selected, .sidebar row:selected {
+    background-color: @dx_cyan_mid;
+    color: @dx_ink;
+}
+placessidebar row:selected:backdrop, stacksidebar row:selected:backdrop, .sidebar row:selected:backdrop {
+    background-color: @dx_cyan_deep;
+    color: @theme_unfocused_selected_fg_color;
+}
+placessidebar row:disabled { color: @dx_off; }
+placessidebar row:backdrop { color: @dx_dim; }
+row image.sidebar-icon { opacity: 0.85; }
+separator.sidebar { background-color: @dx_line; }
+separator.sidebar:backdrop { background-color: @unfocused_borders; }
+
+/* --------------------------------------------------- separators and panes */
+separator { background-color: alpha(@dx_cyan, 0.14); }
+paned > separator, paned.horizontal > separator, paned.vertical > separator {
+    background-color: @dx_line;
+    background-image: none;
+}
+paned > separator:backdrop { background-color: @unfocused_borders; }
+paned > separator.wide { background-color: @dx_head; border-color: @dx_line; }
+
+frame > border, .frame, scrolledwindow.frame, scrolledwindow > border {
+    border-color: @dx_line;
+}
+
+/* -------------------------------------------------------------- notebooks */
+notebook > header, notebook > header:backdrop {
+    background-color: @dx_head;
+    border-color: @dx_line;
+}
+notebook > header tab { color: @dx_dim; }
+notebook > header tab:hover { color: @dx_fg; box-shadow: inset 0 -2px alpha(@dx_cyan, 0.35); }
+notebook > header tab:checked { color: @dx_cyan; }
+notebook > header.top > tabs > tab:checked { box-shadow: inset 0 -3px @dx_cyan; }
+notebook > header.bottom > tabs > tab:checked { box-shadow: inset 0 3px @dx_cyan; }
+notebook > header.left > tabs > tab:checked { box-shadow: inset -3px 0 @dx_cyan; }
+notebook > header.right > tabs > tab:checked { box-shadow: inset 3px 0 @dx_cyan; }
+notebook > header tab:backdrop { color: @dx_off; }
+notebook > header tab:backdrop:checked { color: @dx_dim; }
+notebook > header tab button.flat { color: @dx_dim; }
+notebook > header tab button.flat:hover { color: @dx_cyan; }
+notebook > stack:not(:only-child) { background-color: @dx_void; }
+
+/* ------------------------------------------- header bars, toolbars, bars */
+headerbar, .titlebar {
+    background-color: @dx_head;
+    background-image: linear-gradient(90deg, #070c16 0%, #0a1b2a 50%, #071520 100%);
+    color: @dx_cyan;
+    border-bottom: 1px solid @dx_cyan;
+    box-shadow: 0 1px 10px rgba(0, 245, 255, 0.35);
+}
+headerbar:backdrop, .titlebar:backdrop {
+    background-image: linear-gradient(90deg, #050910 0%, #07121c 100%);
+    color: #7fa6bd;
+    border-bottom: 1px solid #00566b;
+    box-shadow: none;
+}
+headerbar .title, .titlebar .title { color: @dx_cyan; font-weight: bold; }
+headerbar .subtitle, .titlebar .subtitle { color: @dx_dim; }
+headerbar:backdrop .title, .titlebar:backdrop .title { color: #7fa6bd; }
+headerbar.titlebar headerbar:not(.titlebar), .titlebar headerbar:not(.titlebar) {
+    border-bottom: none;
+    box-shadow: none;
+}
+.titlebar:not(headerbar) > separator { background-color: @dx_line; }
+
+toolbar, .toolbar, .inline-toolbar, searchbar > revealer > box, actionbar > revealer > box,
+.primary-toolbar {
+    background-color: @dx_head;
+    background-image: none;
+    border-color: @dx_line;
+    color: @dx_fg;
+}
+toolbar:backdrop, .inline-toolbar:backdrop, searchbar > revealer > box:backdrop,
+actionbar > revealer > box:backdrop {
+    background-color: @dx_head;
+    color: @dx_dim;
+}
+statusbar, .statusbar { background-color: @dx_head; color: @dx_dim; border-top: 1px solid @dx_line; }
+
+/* ---------------------------------------------------------------- buttons */
+button {
+    background-color: @dx_btn;
+    background-image: none;
+    border-color: @dx_line_hi;
+    color: @dx_fg;
+    box-shadow: none;
+    text-shadow: none;
+    -gtk-icon-shadow: none;
+}
+button:hover {
+    background-color: @dx_btn_hover;
+    background-image: none;
+    border-color: alpha(@dx_cyan, 0.65);
+    color: #ffffff;
+    box-shadow: 0 0 6px alpha(@dx_cyan, 0.25);
+}
+button:active, button:checked {
+    background-color: @dx_cyan_deep;
+    background-image: none;
+    border-color: @dx_cyan;
+    color: @dx_cyan;
+    box-shadow: inset 0 1px 2px alpha(black, 0.4);
+}
+button:checked:hover { background-color: shade(@dx_cyan_deep, 1.2); color: #ffffff; }
+button:disabled {
+    background-color: @insensitive_bg_color;
+    background-image: none;
+    border-color: @dx_line;
+    color: @dx_off;
+    box-shadow: none;
+}
+button:checked:disabled { background-color: shade(@dx_cyan_deep, 0.7); color: @dx_off; }
+button:backdrop {
+    background-color: @dx_btn;
+    background-image: none;
+    border-color: @dx_line;
+    color: @dx_dim;
+    box-shadow: none;
+}
+button:backdrop:checked, button:backdrop:active { background-color: @dx_cyan_deep; color: @dx_dim; border-color: alpha(@dx_cyan, 0.4); }
+button:backdrop:disabled { background-color: @insensitive_bg_color; color: @unfocused_insensitive_color; }
+
+button.flat, button.titlebutton, button.sidebar-button, toolbar button, .inline-toolbar button.flat,
+headerbar button.flat, notebook > header > tabs > arrow, popover button.flat, button.image-button.flat {
+    background-color: transparent;
+    background-image: none;
+    border-color: transparent;
+    box-shadow: none;
+}
+button.flat:hover, button.titlebutton:hover, button.sidebar-button:hover, toolbar button:hover,
+notebook > header > tabs > arrow:hover {
+    background-color: alpha(@dx_cyan, 0.12);
+    border-color: transparent;
+    color: @dx_cyan;
+    box-shadow: none;
+}
+button.flat:active, button.flat:checked, toolbar button:active, toolbar button:checked,
+button.titlebutton:active {
+    background-color: alpha(@dx_cyan, 0.22);
+    border-color: transparent;
+    color: @dx_cyan;
+}
+button.flat:disabled, toolbar button:disabled { background-color: transparent; color: @dx_off; }
+button.flat:backdrop, button.titlebutton:backdrop, toolbar button:backdrop {
+    background-color: transparent;
+    border-color: transparent;
+    color: @dx_dim;
+}
+button.flat:backdrop:checked, toolbar button:backdrop:checked { background-color: alpha(@dx_cyan, 0.12); }
+
+headerbar button, .titlebar button { color: @dx_cyan; }
+headerbar button:backdrop, .titlebar button:backdrop { color: #7fa6bd; }
+headerbar button.titlebutton, .titlebar button.titlebutton { color: @dx_fg; }
+headerbar button.titlebutton.close:hover, .titlebar button.titlebutton.close:hover {
+    background-color: alpha(@dx_cyan, 0.28);
     color: #ffffff;
 }
 
+button.suggested-action, button.default:not(.flat) {
+    background-color: @dx_cyan;
+    background-image: linear-gradient(135deg, #00f5ff, #00b3d6);
+    border: 1px solid @dx_cyan;
+    color: @dx_ink;
+    font-weight: bold;
+}
+button.suggested-action:hover {
+    background-image: linear-gradient(135deg, #5cfaff, #00c8e8);
+    box-shadow: 0 0 10px alpha(@dx_cyan, 0.55);
+    color: @dx_ink;
+}
+button.suggested-action:active, button.suggested-action:checked {
+    background-image: image(#00a9bd);
+    color: @dx_ink;
+}
+button.suggested-action:disabled {
+    background-image: image(#0b2a33);
+    border-color: @dx_line;
+    color: @dx_off;
+}
+button.suggested-action:backdrop {
+    background-image: image(#0a6f7c);
+    border-color: #0a6f7c;
+    color: #e6fdff;
+}
+button.destructive-action {
+    background-color: #a8155f;
+    background-image: none;
+    border: 1px solid @dx_pink;
+    color: #ffffff;
+}
+button.destructive-action:hover { background-color: #c21a6f; color: #ffffff; box-shadow: 0 0 8px alpha(@dx_pink, 0.4); }
+button.destructive-action:active, button.destructive-action:checked { background-color: #8a0f4d; color: #ffffff; }
+button.destructive-action:backdrop { background-color: #6d0f3e; border-color: #6d0f3e; color: #f0d6e4; }
+button.destructive-action:disabled { background-color: @insensitive_bg_color; border-color: @dx_line; color: @dx_off; }
+
+button.osd, .osd button {
+    background-color: alpha(@dx_navy, 0.88);
+    background-image: none;
+    border-color: alpha(@dx_cyan, 0.4);
+    color: @dx_fg;
+}
+button.osd:hover, .osd button:hover { background-color: alpha(@dx_btn_hover, 0.92); color: @dx_cyan; }
+.osd, .app-notification, .app-notification.frame {
+    background-color: alpha(@dx_card, 0.95);
+    background-image: none;
+    color: @dx_fg;
+    border-color: alpha(@dx_cyan, 0.4);
+}
+row:selected button.flat:not(:active):not(:checked):not(:hover):not(:disabled),
+row:selected button.sidebar-button:not(:active):not(:checked):not(:hover):not(:disabled) { color: @dx_ink; }
+
+/* ------------------------------------------------ entries, spin, combos */
+entry, spinbutton:not(.vertical), spinbutton.vertical > entry {
+    background-color: @dx_void;
+    background-image: none;
+    border-color: @dx_line_hi;
+    color: @dx_fg;
+    caret-color: @dx_cyan;
+    box-shadow: none;
+}
+entry:focus, spinbutton:focus:not(.vertical), spinbutton.vertical > entry:focus, textview:focus {
+    border-color: @dx_cyan;
+    box-shadow: 0 0 8px rgba(0, 245, 255, 0.6);
+}
+entry:disabled, spinbutton:disabled:not(.vertical) {
+    background-color: @insensitive_bg_color;
+    color: @dx_off;
+    border-color: @dx_line;
+}
+entry:backdrop, spinbutton:backdrop:not(.vertical) {
+    background-color: @dx_void;
+    border-color: @dx_line;
+    color: @dx_dim;
+}
+entry.error, entry.error:focus { color: @dx_pink; border-color: @dx_pink; }
+entry.warning, entry.warning:focus { color: @dx_yellow; border-color: @dx_yellow; }
+entry image { color: @dx_dim; }
+entry image:hover { color: @dx_cyan; }
+entry progress { border-color: @dx_cyan; background-color: transparent; background-image: none; }
+entry placeholder, entry .placeholder { color: @dx_off; }
+spinbutton:not(.vertical) button, spinbutton.vertical button {
+    background-color: transparent;
+    background-image: none;
+    border-color: @dx_line;
+    color: @dx_dim;
+    box-shadow: none;
+}
+spinbutton:not(.vertical) button:hover, spinbutton.vertical button:hover {
+    background-color: alpha(@dx_cyan, 0.12);
+    color: @dx_cyan;
+}
+spinbutton button:disabled { color: @dx_off; background-color: transparent; }
+combobox arrow { color: @dx_dim; }
+combobox button:hover arrow { color: @dx_cyan; }
+popover.combo, popover.combo list { background-color: @dx_card; }
+
+/* ------------------------------------------- scales, progress, level bars */
+scale trough, progressbar trough, scale:backdrop trough, progressbar:backdrop trough {
+    background-color: @dx_line;
+    background-image: none;
+    border-color: @dx_line_hi;
+}
+scale highlight, progressbar progress, scale fill {
+    background-color: @dx_cyan;
+    background-image: none;
+    border-color: @dx_cyan;
+}
+scale:backdrop highlight, progressbar:backdrop progress {
+    background-color: #0a8b99;
+    border-color: #0a8b99;
+}
+scale:disabled highlight, progressbar:disabled progress { background-color: @dx_line_hi; border-color: @dx_line_hi; }
+scale:not(.marks-after):not(.marks-before) slider,
+scale:not(.marks-after):not(.marks-before):not(:disabled) slider,
+scale slider {
+    background-color: #d8f5ff;
+    background-image: none;
+    border: 1px solid @dx_cyan;
+    box-shadow: 0 0 6px alpha(@dx_cyan, 0.45);
+}
+scale:not(.marks-after):not(.marks-before):not(:disabled):hover slider,
+scale slider:hover {
+    background-color: #ffffff;
+    background-image: none;
+    box-shadow: 0 0 10px alpha(@dx_cyan, 0.7);
+}
+scale:not(.marks-after):not(.marks-before):not(:disabled) slider:active,
+scale slider:active { background-color: @dx_cyan; background-image: none; }
+scale:not(.marks-after):not(.marks-before):disabled slider,
+scale:not(.marks-after):not(.marks-before):backdrop slider,
+scale slider:disabled, scale slider:backdrop {
+    background-color: #8fb0c6;
+    background-image: none;
+    border-color: @dx_line_hi;
+    box-shadow: none;
+}
+scale marks, scale value { color: @dx_dim; }
+progressbar text { color: @dx_fg; }
+
+levelbar trough { background-color: @dx_void; border-color: @dx_line_hi; background-image: none; }
+levelbar block, levelbar block.high, levelbar block:not(.empty) {
+    background-color: @dx_cyan;
+    border-color: @dx_cyan;
+}
+levelbar block.low { background-color: @dx_yellow; border-color: @dx_yellow; }
+levelbar block.full { background-color: @dx_mint; border-color: @dx_mint; }
+levelbar block.empty { background-color: @dx_line; border-color: @dx_line; }
+
+/* -------------------------------------------- switches, checks, radios */
+switch {
+    background-color: @dx_btn;
+    background-image: none;
+    border-color: @dx_line_hi;
+    color: @dx_dim;
+    text-shadow: none;
+}
+switch:checked {
+    background-color: @dx_cyan;
+    border-color: @dx_cyan;
+    color: @dx_ink;
+    text-shadow: none;
+}
+switch:disabled { background-color: @insensitive_bg_color; border-color: @dx_line; color: @dx_off; }
+switch:backdrop { background-color: @dx_btn; border-color: @dx_line; color: @dx_dim; }
+switch:backdrop:checked { background-color: #0a8b99; border-color: #0a8b99; }
+switch:backdrop:disabled { background-color: @insensitive_bg_color; }
+switch slider, switch:hover slider {
+    background-color: #d8f5ff;
+    background-image: none;
+    border-color: @dx_line_hi;
+    box-shadow: 0 1px 2px alpha(black, 0.5);
+}
+switch:checked slider { border-color: @dx_cyan; background-color: #ffffff; }
+switch:disabled slider { background-color: @dx_off; border-color: @dx_line; box-shadow: none; }
+switch:backdrop slider { background-color: #8fb0c6; box-shadow: none; }
+
+check, radio,
+.content-view:not(list) check {
+    background-color: @dx_void;
+    background-image: image(@dx_void);
+    border-color: @dx_line_hi;
+    color: @dx_ink;
+    box-shadow: none;
+}
+check:hover, radio:hover { background-image: image(@dx_btn_hover); border-color: @dx_cyan; }
+check:active, radio:active { background-image: image(@dx_btn_down); border-color: @dx_cyan; }
+check:checked, radio:checked, check:indeterminate, radio:indeterminate,
+.content-view:not(list) check:checked {
+    background-image: image(@dx_cyan);
+    border-color: @dx_cyan;
+    color: @dx_ink;
+}
+check:checked:hover, radio:checked:hover { background-image: image(#5cfaff); border-color: #5cfaff; }
+check:checked:active, radio:checked:active { background-image: image(#00b3c2); border-color: #00b3c2; }
+check:disabled, radio:disabled, check:checked:disabled, radio:checked:disabled {
+    background-image: image(@insensitive_bg_color);
+    border-color: @dx_line;
+    color: @dx_off;
+}
+check:backdrop, radio:backdrop { background-image: image(@dx_void); border-color: @dx_line; }
+check:checked:backdrop, radio:checked:backdrop {
+    background-image: image(#0a8b99);
+    border-color: #0a8b99;
+    color: @dx_ink;
+}
+menu menuitem check, menu menuitem radio,
+menu menuitem check:checked, menu menuitem radio:checked,
+menu menuitem check:hover, menu menuitem radio:hover {
+    background-image: none;
+    background-color: transparent;
+    border-color: transparent;
+    color: inherit;
+}
+row:selected check:checked, row:selected radio:checked,
+treeview.view check:checked:selected, treeview.view radio:checked:selected {
+    background-image: image(@dx_ink);
+    border-color: @dx_ink;
+    color: @dx_cyan;
+}
+
+/* ------------------------------------- menus, popovers, tooltips, OSD */
+menu, .menu, .context-menu, menubar > menuitem > menu, window.popup menu {
+    background-color: @dx_card;
+    color: @dx_fg;
+    border: 1px solid alpha(@dx_cyan, 0.35);
+}
+menubar, .menubar { background-color: @dx_head; color: @dx_fg; box-shadow: inset 0 -1px @dx_line; }
+menubar > menuitem:hover { background-color: alpha(@dx_cyan, 0.14); color: @dx_cyan; box-shadow: inset 0 -3px @dx_cyan; }
+menu menuitem, .menu menuitem { color: @dx_fg; background-color: transparent; }
+menu menuitem:hover, .menu menuitem:hover, .context-menu menuitem:hover {
+    background-color: @dx_cyan_mid;
+    color: @dx_ink;
+}
+menu menuitem:disabled, .menu menuitem:disabled { color: @dx_off; }
+menu menuitem accelerator, menuitem accelerator { color: alpha(@dx_fg, 0.6); }
+menu menuitem:hover accelerator { color: alpha(@dx_ink, 0.75); }
+menu separator, .menu separator { background-color: @dx_line; color: @dx_line; }
+menu > arrow { background-color: @dx_card; color: @dx_dim; border-color: @dx_line; }
+
+popover, popover.background {
+    background-color: @dx_card;
+    background-image: none;
+    color: @dx_fg;
+    border: 1px solid alpha(@dx_cyan, 0.35);
+    box-shadow: 0 4px 14px alpha(black, 0.55), 0 0 8px alpha(@dx_cyan, 0.12);
+}
+popover.background:backdrop { background-color: @dx_card; color: @dx_dim; }
+popover.background separator { background-color: @dx_line; }
+popover modelbutton:hover, popover.background modelbutton.flat:hover, modelbutton.flat:hover {
+    background-color: alpha(@dx_cyan, 0.14);
+    color: @dx_cyan;
+}
+popover list, popover .view, popover treeview.view { background-color: @dx_card; }
+
+tooltip, tooltip.background, .tooltip, tooltip.background.csd {
+    background-color: alpha(#03060c, 0.96);
+    background-image: none;
+    color: @dx_fg;
+    border: 1px solid alpha(@dx_cyan, 0.45);
+    border-radius: 6px;
+    box-shadow: none;
+}
+tooltip *, tooltip label { color: @dx_fg; background-color: transparent; }
+
+/* ---------------------------------------------------------------- infobars */
+infobar, infobar.info, infobar.question {
+    background-color: #0a2734;
+    background-image: none;
+    color: @dx_fg;
+    border-color: @dx_cyan;
+}
+infobar.warning { background-color: #2b2408; color: #fff3c4; border-color: @dx_yellow; }
+infobar.error { background-color: #2e0b1f; color: #ffd6ea; border-color: @dx_pink; }
+infobar > revealer > box, infobar.info > revealer > box, infobar.question > revealer > box,
+infobar.warning > revealer > box, infobar.error > revealer > box { background-color: transparent; }
+infobar button { background-color: alpha(@dx_navy, 0.7); color: @dx_fg; border-color: alpha(@dx_cyan, 0.5); }
+infobar button:hover { background-color: @dx_btn_hover; color: @dx_cyan; }
+.error, label.error { color: @dx_pink; }
+.warning, label.warning { color: @dx_yellow; }
+.success, label.success { color: @dx_mint; }
+
+/* -------------------------------------------------------------- scrollbars */
+scrollbar, scrollbar:backdrop {
+    background-color: alpha(@dx_void, 0.85);
+    background-image: none;
+    border-color: @dx_line;
+}
+scrollbar.overlay-indicator:not(.dragging):not(.hovering) { background-color: transparent; border-color: transparent; }
 scrollbar slider {
     background-color: #00c2cb;
     border-radius: 4px;
+    border-color: transparent;
 }
-
-scrollbar slider:hover {
-    background-color: #00f5ff;
+scrollbar slider:hover { background-color: @dx_cyan; }
+scrollbar slider:hover:active { background-color: #5cfaff; }
+scrollbar slider:backdrop { background-color: #2b5a6b; }
+scrollbar slider:disabled { background-color: transparent; }
+scrollbar.overlay-indicator:not(.dragging):not(.hovering) slider {
+    background-color: alpha(#00c2cb, 0.8);
+    border: 1px solid alpha(@dx_void, 0.6);
 }
+treeview ~ scrollbar.vertical { border-color: @dx_line; }
 
-button.suggested-action {
-    background-image: linear-gradient(135deg, #00f5ff, #0077b6);
-    color: #070812;
-    border: 1px solid #00f5ff;
-    font-weight: bold;
-}
+/* ------------------------------------------------------- other widgets */
+expander title > arrow { color: @dx_dim; }
+expander title:hover > arrow { color: @dx_cyan; }
+calendar { background-color: @dx_void; color: @dx_text; border-color: @dx_line; }
+calendar:selected { background-color: @dx_cyan_mid; color: @dx_ink; }
+calendar.header, calendar.button { background-color: @dx_head; color: @dx_dim; border-color: @dx_line; }
+calendar.button:hover { color: @dx_cyan; }
+calendar:indeterminate { color: @dx_off; }
+calendar.highlight { color: @dx_cyan; }
+colorswatch { border-color: @dx_line_hi; }
+filechooser .path-bar button { font-weight: normal; }
+filechooser #pathbarbox, filechooser actionbar { background-color: @dx_head; border-color: @dx_line; }
+.dialog-action-area button, messagedialog .dialog-action-area button { border-color: @dx_line; }
+messagedialog.background, messagedialog .dialog-vbox { background-color: @dx_card; }
+.linked:not(.vertical) > button, .linked > entry, .linked > combobox > box > button { border-color: @dx_line_hi; }
 
-entry:focus, textview:focus {
-    border-color: #00f5ff;
-    box-shadow: 0 0 8px rgba(0, 245, 255, 0.6);
+/* ------------------------------------------------ desktop icons (DING) */
+/* Keep the desktop transparent: DING draws its icon grid with GTK, and the
+   view and window rules above would otherwise paint it navy. Keep this last. */
+window.desktopwindow, window.desktopwindow.background,
+window.desktopwindow .view, window.desktopwindow iconview, window.desktopwindow list,
+window.desktopwindow grid, window.desktopwindow box, window.desktopwindow eventbox,
+window.desktopwindow scrolledwindow, window.desktopwindow viewport {
+    background-color: rgba(0, 0, 0, 0);
+    background-image: none;
 }

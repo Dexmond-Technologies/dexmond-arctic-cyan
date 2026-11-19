@@ -1,0 +1,89 @@
+/* Dexmond Arctic Cyan: GNOME Shell theme (top bar, menus, quick settings,
+ * calendar, notifications, dash, overview search).
+ * Needs the "User Themes" GNOME Shell extension. install.sh only uses it if
+ * that extension is already installed; it never installs extensions.
+ * It loads Ubuntu's Yaru dark Shell theme first and recolours it. */
+@import url("/usr/share/themes/Yaru-blue-dark/gnome-shell/gnome-shell.css");
+
+/* Top bar */
+#panel {
+  background-color: #070912;
+  border-bottom: 1px solid rgba(0, 245, 255, 0.55);
+}
+#panel .panel-button { color: #d8f5ff; }
+#panel .panel-button:hover, #panel .panel-button:focus, #panel .panel-button:active,
+#panel .panel-button:checked {
+  background-color: rgba(0, 245, 255, 0.16);
+  color: #00f5ff;
+  box-shadow: inset 0 0 0 1px rgba(0, 245, 255, 0.45);
+}
+#panel .panel-button.clock-display .clock { color: #00f5ff; }
+#panel.solid, #panel.login-screen, #panel.unlock-screen { background-color: #070912; }
+
+/* Menus and popovers */
+.popup-menu-content, .candidate-popup-content {
+  background-color: #0c1424;
+  color: #d8f5ff;
+  border: 1px solid rgba(0, 245, 255, 0.35);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.55);
+}
+.popup-menu-item { color: #d8f5ff; }
+.popup-menu-item:hover, .popup-menu-item:focus, .popup-menu-item.selected {
+  background-color: rgba(0, 245, 255, 0.16);
+  color: #ffffff;
+}
+.popup-menu-item:checked { background-color: rgba(0, 245, 255, 0.10); }
+.popup-separator-menu-item .popup-separator-menu-item-separator { background-color: #16283c; }
+.popup-menu-ornament { color: #00f5ff; }
+.toggle-switch:checked { background-color: #00c8d4; }
+
+/* Quick settings */
+.quick-settings { background-color: #0c1424; border: 1px solid rgba(0, 245, 255, 0.35); }
+.quick-toggle, .quick-menu-toggle .quick-toggle { background-color: #13263a; color: #d8f5ff; }
+.quick-toggle:hover { background-color: #183049; }
+.quick-toggle:checked, .quick-menu-toggle .quick-toggle:checked,
+.quick-menu-toggle .quick-toggle-arrow:checked {
+  background-color: #00c8d4;
+  color: #03121a;
+}
+.quick-toggle:checked:hover { background-color: #00e0ec; }
+.quick-toggle-menu { background-color: #0c1424; border: 1px solid rgba(0, 245, 255, 0.35); }
+.quick-toggle-menu .header .icon.active { background-color: #00c8d4; color: #03121a; }
+.slider { -barlevel-active-background-color: #00f5ff; -barlevel-background-color: #16283c; -slider-handle-border-color: #00f5ff; }
+.icon-button:hover, .button:hover { background-color: rgba(0, 245, 255, 0.16); }
+
+/* Calendar and notifications */
+.calendar-today, .calendar-today:selected { background-color: #00c8d4; color: #03121a; }
+.calendar-day-base:hover, .calendar-day-base:focus { background-color: rgba(0, 245, 255, 0.16); }
+.message, .notification-banner { background-color: #0c1424; color: #d8f5ff; border: 1px solid #16283c; }
+.message:hover, .notification-banner:hover { background-color: #13263a; }
+.message-title { color: #00f5ff; }
+.events-button, .world-clocks-button, .weather-button { background-color: #0e1a2b; }
+.events-button:hover, .world-clocks-button:hover, .weather-button:hover { background-color: #13263a; }
+
+/* Dash, app grid, search */
+#dash .dash-background { background-color: rgba(7, 9, 18, 0.88); border: 1px solid rgba(0, 245, 255, 0.25); }
+.app-well-app.app-folder, .app-folder { background-color: rgba(12, 20, 36, 0.8); }
+.app-well-app:hover .overview-icon, .app-well-app:focus .overview-icon,
+.show-apps:hover .overview-icon { background-color: rgba(0, 245, 255, 0.16); }
+.app-well-app-running-dot { background-color: #00f5ff; }
+.search-entry { background-color: #05070d; color: #d8f5ff; border: 1px solid #23415a; }
+.search-entry:focus { border-color: #00f5ff; box-shadow: 0 0 6px rgba(0, 245, 255, 0.45); }
+.search-section-content { background-color: #0c1424; }
+.list-search-result:hover, .list-search-result:focus, .grid-search-result:hover, .grid-search-result:focus {
+  background-color: rgba(0, 245, 255, 0.16);
+}
+
+/* Switcher and OSD */
+.switcher-list, .osd-window, .resize-popup {
+  background-color: rgba(12, 20, 36, 0.95);
+  color: #d8f5ff;
+  border: 1px solid rgba(0, 245, 255, 0.35);
+}
+.switcher-list .item-box:selected { background-color: rgba(0, 245, 255, 0.22); }
+.osd-window .level { -barlevel-active-background-color: #00f5ff; -barlevel-background-color: #16283c; }
+
+/* Dialogs */
+.modal-dialog { background-color: #0c1424; color: #d8f5ff; border: 1px solid rgba(0, 245, 255, 0.35); }
+.modal-dialog-button-box .button { background-color: #0e1a2b; color: #d8f5ff; }
+.modal-dialog-button-box .button:hover { background-color: #13263a; color: #00f5ff; }

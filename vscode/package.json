@@ -1,0 +1,15 @@
+{
+  "name": "dexmond-arctic-cyan",
+  "displayName": "Dexmond Arctic Cyan",
+  "description": "Navy editor theme with Arctic Cyan accents, from the Dexmond Arctic Cyan desktop theme.",
+  "version": "1.1.0",
+  "publisher": "dexmond",
+  "license": "MIT",
+  "engines": { "vscode": "^1.70.0" },
+  "categories": ["Themes"],
+  "contributes": {
+    "themes": [
+      { "label": "Dexmond Arctic Cyan", "uiTheme": "vs-dark", "path": "./themes/dexmond-arctic-cyan-color-theme.json" }
+    ]
+  }
+}
